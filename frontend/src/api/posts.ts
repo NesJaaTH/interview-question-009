@@ -10,7 +10,7 @@ export interface Post {
 const TOKEN_KEY = 'auth_token'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseURL: process.env.VUE_APP_API_BASE_URL || '/api',
 })
 
 api.interceptors.request.use(config => {
