@@ -3,7 +3,7 @@
 A single-page web app showing a post with a comment section.  
 Users sign in and submit comments by pressing **Enter**.
 
-**Stack:** Go + Fiber v3 + GORM + SQLite · React + TypeScript + Tailwind v4 + Zustand
+**Stack:** Go + Fiber v3 + GORM + SQLite · Vue 3 + TypeScript + Tailwind v4 + Pinia · Vue CLI
 
 ---
 
@@ -34,11 +34,14 @@ interview-question/
 │   │   └── middleware/    # JWT guard
 │   └── .env.example
 └── frontend/
+    ├── public/            # HTML template
     ├── src/
     │   ├── api/           # axios clients
-    │   ├── store/         # Zustand auth store
-    │   ├── pages/         # LoginPage
+    │   ├── assets/        # global CSS
+    │   ├── stores/        # Pinia auth store
+    │   ├── views/         # LoginPage
     │   └── components/    # Post, CommentSection
+    ├── vue.config.ts      # Vue CLI config + dev proxy
     └── .env.example
 ```
 
@@ -73,11 +76,7 @@ JWT_SECRET=your-secret-key-here
 ### 3. Run the server
 
 ```bash
-# Option A — standard
 go run ./cmd/server
-
-# Option B — live reload with Air
-make dev
 ```
 
 The server starts on `http://localhost:7809`.  
@@ -112,12 +111,12 @@ cp .env.example .env.local
 Open `.env.local` and fill in the values:
 
 ```env
-VITE_API_BASE_URL=/api
-VITE_BACKEND_URL=http://localhost:7809
+VUE_APP_API_BASE_URL=/api
+VUE_APP_BACKEND_URL=http://localhost:7809
 ```
 
-> `VITE_BACKEND_URL` tells the Vite dev-server proxy where to forward `/api` requests.  
-> In a production build, set `VITE_API_BASE_URL` to the full backend URL instead.
+> `VUE_APP_BACKEND_URL` tells the Vue CLI dev-server proxy where to forward `/api` requests.  
+> In a production build, set `VUE_APP_API_BASE_URL` to the full backend URL instead.
 
 ### 3. Start the dev server
 
